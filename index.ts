@@ -13,7 +13,18 @@ const server = Bun.serve({
       return new Response(body);
     }
 
+    if (url.pathname === "/feed") {
+      throw new Error("Could Not Fetch feed");
+    }
+
     return new Response("404");
+  },
+  error(error) {
+    return new Response(`<pre>${error} \n${error.stack} </pre>`, {
+      headers: {
+        "Content-type": "text/html",
+      },
+    });
   },
 });
 
