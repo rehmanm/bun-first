@@ -12,9 +12,11 @@ const server = Bun.serve({
       const body = figlet.textSync("About");
       return new Response(body);
     }
-
     if (url.pathname === "/feed") {
       throw new Error("Could Not Fetch feed");
+    }
+    if (url.pathname === "/greet") {
+      return new Response(Bun.file("./greet.txt"));
     }
 
     return new Response("404");
